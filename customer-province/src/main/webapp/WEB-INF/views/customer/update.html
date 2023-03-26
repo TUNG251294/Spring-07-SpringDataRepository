@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Customer</title>
+</head>
+<body>
+<h1>Update Customer</h1>
+<p>
+    <a href="/customer/all">Customer list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/customer/edit}" th:object="${customer}" method="POST">
+    <!--    dong khac biet voi createForm-->
+    <input th:type="hidden" name="id" th:field="*{id}">
+
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Number Phone: </td>
+            <td><input type="text" th:field="*{phone}"/></td>
+        </tr>
+
+        <tr>
+            <td>Province:</td>
+            <td>
+                <select name="province">
+                    <option th:each="p : ${provinces}"
+                            th:value="${p.id}"
+                            th:text="${p.name}"
+                            th:selected="(${customer.province}) and (${p.id} == *{province.id})">
+<!--                        xác địnhtùy chọn nào sẽ được chọn mặc định khi trang web được tải lên-->
+                    </option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update Customer"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

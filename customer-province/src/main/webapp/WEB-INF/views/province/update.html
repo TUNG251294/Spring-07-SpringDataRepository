@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Province</title>
+</head>
+<body>
+<h1>Update Province</h1>
+<p>
+    <a href="/province/all">Province List</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/province/edit}" th:object="${province}" method="POST">
+    <!--    dong khac biet voi createForm-->
+    <input th:type="hidden" name="id" th:field="*{id}">
+
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update Province"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

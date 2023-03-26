@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Customer</title>
+</head>
+<body>
+<h1>Create customer</h1>
+<p>
+    <a href="/customer/all">Customer list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/customer/save}" th:object="${customer}" method="POST">
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Number Phone: </td>
+            <td><input type="text" th:field="*{phone}"/></td>
+        </tr>
+
+        <tr>
+            <td>Province:</td>
+            <td>
+                <select th:field="*{province}">
+                    <option th:each="p : ${provinces}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+            </td>
+        </tr>
+<!--giá trị của trường <select> là id của province, do đó cần chuyển đổi từ id của province sang object của province = cách sử dụng converter hoặc formatter-->
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create Customer"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

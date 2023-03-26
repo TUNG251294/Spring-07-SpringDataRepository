@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+<a href="/customer/create">Create new Customer</a>
+<h1>Customers</h1>
+<table border="1">
+    <tr>
+        <th>Customer Name</th>
+        <th>Number Phone</th>
+        <th>Province</th>
+        <th>Service</th>
+    </tr>
+    <th:block th:each="customer : ${customers}">
+        <tr>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.phone}"></td>
+
+            <td th:if="${customer.province}" th:text="${customer.province.name}"></td>
+            <td th:unless="${customer.province}"></td>
+<!--Annotation th:unless tương tự như th:if, nhưng nội dung bên trong thẻ <td> sẽ được hiển thị nếu điều kiện đặt ra là false-->
+            <td><a th:href="@{/customer/update/__${customer.id}__}">Update</a></td>
+            <td><a th:href="@{/customer/delete/__${customer.id}__}">Delete</a></td>
+
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
